@@ -6,22 +6,24 @@
   version: {{ version }}
 
  source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 8968ece4cba16a4b792cb0d06bf714007375b4c9c52c109fec52ceabc1a39d61
 
  build: 
-  number: 0
+  number: 1
   script: "{{ PYTHON }} -m pip install . --no-deps -vv"
   noarch: python
 
  requirements:
   host:
-    - python >=3.0
+    - python {{ python_min }}
     - pip
   run:
-    - python >=3.0
+    - python >={{ python_min }}
 
  test:
+  requires:
+   - python {{ python_min }}
   imports:
     - brainbox
 
